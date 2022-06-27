@@ -4,6 +4,7 @@
     <button @click="incr">incr</button>
     <button @click="ChatIncrement">ChatIncrement</button>
     <button @click="ChatV2Increment">ChatV2Increment</button>
+    <button @click="ChatV2DiyStateIncr">ChatV2DiyStateIncr</button>
     <div>defaultCount = {{ defaultCount }}</div>
     <div>chatCount = {{ chatCount }}</div>
     <div>chatCountV2 = {{ chatCountV2 }}</div>
@@ -16,7 +17,8 @@
 <script lang="ts" setup>
 import {computed} from "vue";
 import {useStore} from "vuex";
-const store = useStore()
+import {key} from "@/store";
+const store = useStore(key)
 
 console.log("store", store);
 let defaultCount = computed(() => store.state.defaultCount)
@@ -46,6 +48,11 @@ function ChatIncrement() {
 function ChatV2Increment() {
   // 使用 mutation
   store.commit('ChatV2Increment')
+}
+
+function ChatV2DiyStateIncr() {
+  // 使用 mutation
+  store.commit('ChatV2DiyStateIncr')
 }
 </script>
 

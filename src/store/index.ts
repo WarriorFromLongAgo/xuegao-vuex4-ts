@@ -1,4 +1,14 @@
-import {createStore} from 'vuex'
+import {createStore, Store} from 'vuex'
+import {InjectionKey} from "vue";
+
+// 为 store state 声明类型
+export interface DiyState {
+    defaultCount?: number,
+    chatCount?: number,
+    chatCountV2?: number
+}
+
+export const key: InjectionKey<Store<DiyState>> = Symbol()
 
 const CHAT = {
     state: {
@@ -31,6 +41,14 @@ const CHAT_V2 = {
             CHAT_V2.state.chatCountV2 = number
             console.log("[xuegao-vuex4-ts][index.ts][chatCountV2=s%]", CHAT_V2.state.chatCountV2)
         },
+        ChatV2DiyStateIncr(state: DiyState) {
+            console.log("ChatV2DiyStateIncr ", state)
+            console.log("ChatV2DiyStateIncr chatCountV2 ", state.chatCountV2)
+            if (state.chatCountV2 != undefined) {
+                state.chatCountV2++;
+            }
+            console.log("ChatV2DiyStateIncr chatCountV2 ++ ", state.chatCountV2)
+        },
     },
     getters: {
         getChatCountV2() {
@@ -40,7 +58,7 @@ const CHAT_V2 = {
     }
 };
 
-export default createStore({
+export default createStore<DiyState>({
     state: {
         defaultCount: 0
     },
