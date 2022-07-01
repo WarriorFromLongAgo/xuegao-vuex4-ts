@@ -1,6 +1,10 @@
 import {createStore} from 'vuex'
 
 // 为 store state 声明类型
+export interface DiyState {
+    defaultCount: number
+}
+
 export interface DiyState1 {
     chatCount: number
 }
@@ -29,12 +33,6 @@ const CHAT = {
             console.log("[xuegao-vuex4-ts][index.ts][getChatCount][chatCount=", state.chatCount)
             return state.chatCount
         },
-        // 这个是没有用的
-        getChatCount2() {
-            console.log("[xuegao-vuex4-ts][index.ts][getChatCount2][state=", CHAT.state)
-            console.log("[xuegao-vuex4-ts][index.ts][getChatCount2][chatCount=", CHAT.state.chatCount)
-            return CHAT.state.chatCount
-        }
     }
 };
 const CHAT_V2 = {
@@ -57,20 +55,18 @@ const CHAT_V2 = {
             console.log("[xuegao-vuex4-ts][index.ts][getChatCountV2][chatCountV2=", state.chatCountV2)
             return state.chatCountV2
         },
-        // 这个是没有用的
-        getChatCountV22() {
-            console.log("[xuegao-vuex4-ts][index.ts][getChatCountV22][state=", CHAT_V2.state)
-            console.log("[xuegao-vuex4-ts][index.ts][getChatCountV22][chatCount=", CHAT_V2.state.chatCountV2)
-            return CHAT_V2.state.chatCountV2
-        }
     }
 };
 
-export default createStore({
+export default createStore<DiyState>({
     state: {
         defaultCount: 0
     },
-    getters: {},
+    getters: {
+        getterDefaultCount(state: DiyState) {
+            console.log("[xuegao-vuex4-ts][index.ts][getterDefaultCount][state]", state)
+        },
+    },
     mutations: {},
     actions: {},
     modules: {
