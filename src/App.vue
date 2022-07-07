@@ -1,35 +1,46 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
   <div>
-    <button @click="ChatMutations">ChatMutations</button> | chatCount getter = {{ chatCountGetter }}
+    <button @click="chatMuChatCountIncr">chatMuChatCountIncr</button>
+    | chatCount getter = {{ chatGetChatCountComputed }}
     <h1></h1>
-    <button @click="ChatV2Mutations">ChatV2Mutations</button> | chatCountV2 getter = {{ chatCountV2Getter }}
+    <button @click="chatV2MuChatCountV2Incr">chatV2MuChatCountV2Incr</button>
+    | chatCountV2 getter = {{ chatV2GetChatCountV2Computed }}
     <h1></h1>
-    getterDefaultCount = {{ getterDefaultCount }}
+    getterDefaultCount = {{ getDefaultCountComputed }}
+  </div>
+  <div>
+    <div>mapStateTest chatCount = {{ mapStateTest.chatCount }}</div>
+    <div>mapStateTest chatCount = mapStateTestChatCount</div>
+    <div>mapStateTest chatCount = mapStateTestChatCountTest2</div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import {computed} from "vue";
-import {useStore} from "vuex";
+import {useStore, mapState, mapGetters, mapMutations, mapActions} from "vuex";
+
 const store = useStore()
 
-let chatCountGetter = computed(() => store.getters.getChatCount)
-console.log("chatCountGetter", chatCountGetter);
-let chatCountV2Getter = computed(() => store.getters.getChatCountV2)
-console.log("chatCountV2Getter", chatCountV2Getter);
+const mapStateTest = mapState(["chatCount", "chatCountV2"])
 
-function ChatMutations() {
+
+let chatGetChatCountComputed = computed(() => store.getters.chatGetChatCount)
+console.log("chatGetChatCountComputed", chatGetChatCountComputed);
+let chatV2GetChatCountV2Computed = computed(() => store.getters.chatV2GetChatCountV2)
+console.log("chatV2GetChatCountV2Computed", chatV2GetChatCountV2Computed);
+
+function chatMuChatCountIncr() {
   // 使用 mutation
-  store.commit('ChatMutations')
+  store.commit('chatMuChatCountIncr')
 }
-function ChatV2Mutations() {
+
+function chatV2MuChatCountV2Incr() {
   // 使用 mutation
-  store.commit('ChatV2Mutations')
+  store.commit('chatV2MuChatCountV2Incr')
 }
 
-
-let getterDefaultCount = computed(() => store.getters.getterDefaultCount)
+let getDefaultCountComputed = computed(() => store.getters.getDefaultCount)
 
 
 </script>
