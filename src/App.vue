@@ -10,8 +10,8 @@
     getterDefaultCount = {{ getDefaultCountComputed }}
   </div>
   <div>
-    <div>mapStateTest chatCount = {{ mapStateTest.chatCount }}</div>
-    <div>mapStateTest chatCount = mapStateTestChatCount</div>
+    <div>mapStateTest chatCount = {{ chatGetChatCount }}</div>
+    <div>mapStateTest chatCount = chatGetChatCount</div>
     <div>mapStateTest chatCount = mapStateTestChatCountTest2</div>
   </div>
 </template>
@@ -22,7 +22,8 @@ import {useStore, mapState, mapGetters, mapMutations, mapActions} from "vuex";
 
 const store = useStore()
 
-const mapStateTest = mapState(["chatCount", "chatCountV2"])
+let chatGetChatCount = computed(() => store.state.chatCount)
+console.log(" chatGetChatCount ", chatGetChatCount)
 
 
 let chatGetChatCountComputed = computed(() => store.getters.chatGetChatCount)
